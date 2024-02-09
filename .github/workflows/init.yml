@@ -1,0 +1,26 @@
+name: Init
+
+on: [create, workflow_dispatch]
+
+permissions: 
+  issues: write
+  contents: read
+
+jobs:
+  initialize_repo:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Create Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create -t "❓ GitHubの使用経験は？" -b "GitHubの使用経験は？他のCI/CDツールの経験は？ 以下にコメントしてください 👇"
+          gh issue create -t "❓ 何を学びたいですか？" -b "何を学びたいですか？具体的にどんなシナリオに興味がありますか？ 以下にコメントしてください 👇"
+          gh issue create -t "🔍 1 日目のふりかえり: 何が良かったですか？" -b "このコースの 1 日目の内容について、何が良かったですか？ 以下にコメントしてください 👇"
+          gh issue create -t "🔍 1 日目のふりかえり: 改善点はありますか？" -b "改善点、何が足りなかったと感じるポイントはありますか？以下にコメントしてください 👇"
+          gh issue create -t "❤️ 昨日初めて知った機能で一番気に入ったものは何ですか？" -b "昨日初めて知った GitHub Actions の機能の中で一番気に入ったものは何ですか？もしよろしければ、あなたの趣味を追加してグループで共有してください。以下にコメントしてください 👇"
+          gh issue create -t "🔍 2 日目のふりかえり: 何が良かったですか？" -b "このコースの 1 日目の内容について、何が良かったですか？ 以下にコメントしてください 👇"
+          gh issue create -t "🔍 2 日目のふりかえり: 改善点はありますか？" -b "改善点、何が足りなかったと感じるポイントはありますか？以下にコメントしてください 👇"
